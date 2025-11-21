@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # My ignores
-config/digitransit_keys.json
+**/digitransit_keys.json
