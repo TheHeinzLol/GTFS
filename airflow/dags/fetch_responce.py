@@ -26,7 +26,7 @@ def fetch_response(service: str = "trip_updates") -> requests.models.Response:
         response = requests.get(service)
         response.raise_for_status()
         print("API response received successfully.")
-        return response
+        return response.content
 
     except: requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
