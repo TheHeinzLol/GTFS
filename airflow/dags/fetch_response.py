@@ -12,7 +12,7 @@ def fetch_response(service: str = "trip_updates") -> requests.models.Response:
             'vehicle_positions' - updates every second. 
             'service_alerts' - updates once every 5 minutes"""
     # Read credentials
-    credentials_path = Path("./config/digitransit_keys.json")
+    credentials_path = Path().cwd().parent / Path("config/digitransit_keys.json")
     with open(credentials_path, mode="r", encoding="utf-8" ) as credentials_json:
         credentials = json.load(credentials_json)
     # Endpoints
@@ -23,14 +23,14 @@ def fetch_response(service: str = "trip_updates") -> requests.models.Response:
             }
     # vehicle_positions
     try:
-        response = requests.get(service)
+        response = requests.get(endpoints[service])
         response.raise_for_status()
         print("API response received successfully.")
         return response.content
 
-    except: requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
         raise
 
-if __name__ = "__main_":
+if __name__ == "__main_":
     fetch_response()
